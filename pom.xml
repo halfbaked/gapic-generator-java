@@ -3,6 +3,7 @@
   <groupId>com.google.api</groupId>
   <artifactId>gapic-generator-java</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <classifier>core</classifier>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
