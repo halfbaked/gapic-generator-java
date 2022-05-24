@@ -1,6 +1,5 @@
 package com.google.testdata.v1;
 
-import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
 import com.google.api.gax.rpc.UnaryCallable;
 import com.google.protobuf.Empty;
@@ -16,6 +15,8 @@ import javax.annotation.Generated;
  * that map to API methods. Sample code to get started:
  *
  * <pre>{@code
+ * // This snippet has been automatically generated for illustrative purposes only.
+ * // It may require modifications to work in your environment.
  * try (DeprecatedServiceClient deprecatedServiceClient = DeprecatedServiceClient.create()) {
  *   FibonacciRequest request = FibonacciRequest.newBuilder().setValue(111972721).build();
  *   deprecatedServiceClient.fastFibonacci(request);
@@ -52,6 +53,8 @@ import javax.annotation.Generated;
  * <p>To customize credentials:
  *
  * <pre>{@code
+ * // This snippet has been automatically generated for illustrative purposes only.
+ * // It may require modifications to work in your environment.
  * DeprecatedServiceSettings deprecatedServiceSettings =
  *     DeprecatedServiceSettings.newBuilder()
  *         .setCredentialsProvider(FixedCredentialsProvider.create(myCredentials))
@@ -63,6 +66,8 @@ import javax.annotation.Generated;
  * <p>To customize the endpoint:
  *
  * <pre>{@code
+ * // This snippet has been automatically generated for illustrative purposes only.
+ * // It may require modifications to work in your environment.
  * DeprecatedServiceSettings deprecatedServiceSettings =
  *     DeprecatedServiceSettings.newBuilder().setEndpoint(myEndpoint).build();
  * DeprecatedServiceClient deprecatedServiceClient =
@@ -97,7 +102,6 @@ public class DeprecatedServiceClient implements BackgroundResource {
    * Constructs an instance of DeprecatedServiceClient, using the given stub for making calls. This
    * is for advanced usage - prefer using create(DeprecatedServiceSettings).
    */
-  @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public static final DeprecatedServiceClient create(DeprecatedServiceStub stub) {
     return new DeprecatedServiceClient(stub);
   }
@@ -112,7 +116,6 @@ public class DeprecatedServiceClient implements BackgroundResource {
     this.stub = ((DeprecatedServiceStubSettings) settings.getStubSettings()).createStub();
   }
 
-  @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   protected DeprecatedServiceClient(DeprecatedServiceStub stub) {
     this.settings = null;
     this.stub = stub;
@@ -122,7 +125,6 @@ public class DeprecatedServiceClient implements BackgroundResource {
     return settings;
   }
 
-  @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public DeprecatedServiceStub getStub() {
     return stub;
   }
@@ -132,6 +134,8 @@ public class DeprecatedServiceClient implements BackgroundResource {
    * Sample code:
    *
    * <pre>{@code
+   * // This snippet has been automatically generated for illustrative purposes only.
+   * // It may require modifications to work in your environment.
    * try (DeprecatedServiceClient deprecatedServiceClient = DeprecatedServiceClient.create()) {
    *   FibonacciRequest request = FibonacciRequest.newBuilder().setValue(111972721).build();
    *   deprecatedServiceClient.fastFibonacci(request);
@@ -150,6 +154,8 @@ public class DeprecatedServiceClient implements BackgroundResource {
    * Sample code:
    *
    * <pre>{@code
+   * // This snippet has been automatically generated for illustrative purposes only.
+   * // It may require modifications to work in your environment.
    * try (DeprecatedServiceClient deprecatedServiceClient = DeprecatedServiceClient.create()) {
    *   FibonacciRequest request = FibonacciRequest.newBuilder().setValue(111972721).build();
    *   ApiFuture<Empty> future = deprecatedServiceClient.fastFibonacciCallable().futureCall(request);
@@ -167,6 +173,8 @@ public class DeprecatedServiceClient implements BackgroundResource {
    * Sample code:
    *
    * <pre>{@code
+   * // This snippet has been automatically generated for illustrative purposes only.
+   * // It may require modifications to work in your environment.
    * try (DeprecatedServiceClient deprecatedServiceClient = DeprecatedServiceClient.create()) {
    *   FibonacciRequest request = FibonacciRequest.newBuilder().setValue(111972721).build();
    *   deprecatedServiceClient.slowFibonacci(request);
@@ -187,6 +195,8 @@ public class DeprecatedServiceClient implements BackgroundResource {
    * Sample code:
    *
    * <pre>{@code
+   * // This snippet has been automatically generated for illustrative purposes only.
+   * // It may require modifications to work in your environment.
    * try (DeprecatedServiceClient deprecatedServiceClient = DeprecatedServiceClient.create()) {
    *   FibonacciRequest request = FibonacciRequest.newBuilder().setValue(111972721).build();
    *   ApiFuture<Empty> future = deprecatedServiceClient.slowFibonacciCallable().futureCall(request);

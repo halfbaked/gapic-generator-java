@@ -36,6 +36,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class HttpRuleParser {
   private static final String ASTERISK = "*";
@@ -68,11 +69,12 @@ public class HttpRuleParser {
     // Get pattern.
     String pattern = getHttpVerbPattern(httpRule);
     ImmutableSet.Builder<String> bindingsBuilder = ImmutableSet.builder();
-    bindingsBuilder.addAll(PatternParser.getPattenBindings(pattern));
+    bindingsBuilder.addAll(PatternParser.getPatternBindings(pattern));
     if (httpRule.getAdditionalBindingsCount() > 0) {
       for (HttpRule additionalRule : httpRule.getAdditionalBindingsList()) {
         // TODO: save additional bindings path in HttpRuleBindings
-        bindingsBuilder.addAll(PatternParser.getPattenBindings(getHttpVerbPattern(additionalRule)));
+        bindingsBuilder.addAll(
+            PatternParser.getPatternBindings(getHttpVerbPattern(additionalRule)));
       }
     }
 
@@ -104,6 +106,10 @@ public class HttpRuleParser {
     return HttpBindings.builder()
         .setHttpVerb(HttpBindings.HttpVerb.valueOf(httpRule.getPatternCase().toString()))
         .setPattern(pattern)
+        .setAdditionalPatterns(
+            httpRule.getAdditionalBindingsList().stream()
+                .map(HttpRuleParser::getHttpVerbPattern)
+                .collect(Collectors.toList()))
         .setPathParameters(
             validateAndConstructHttpBindings(
                 pathParamNames, message, messageTypes, patternSampleValues))
@@ -128,7 +134,7 @@ public class HttpRuleParser {
           patternSampleValues != null ? patternSampleValues.get(paramName) : null;
       String[] subFields = paramName.split("\\.");
       if (inputMessage == null) {
-        httpBindings.add(HttpBinding.create(paramName, false, patternSampleValue));
+        httpBindings.add(HttpBinding.create(paramName, false, false, patternSampleValue));
         continue;
       }
       Message nestedMessage = inputMessage;
@@ -150,7 +156,8 @@ public class HttpRuleParser {
           }
           Field field = nestedMessage.fieldMap().get(subFieldName);
           httpBindings.add(
-              HttpBinding.create(paramName, field.isProto3Optional(), patternSampleValue));
+              HttpBinding.create(
+                  paramName, field.isProto3Optional(), field.isRepeated(), patternSampleValue));
         }
       }
     }

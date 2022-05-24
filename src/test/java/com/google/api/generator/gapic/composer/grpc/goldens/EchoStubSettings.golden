@@ -70,6 +70,8 @@ import org.threeten.bp.Duration;
  * <p>For example, to set the total timeout of echo to 30 seconds:
  *
  * <pre>{@code
+ * // This snippet has been automatically generated for illustrative purposes only.
+ * // It may require modifications to work in your environment.
  * EchoStubSettings.Builder echoSettingsBuilder = EchoStubSettings.newBuilder();
  * echoSettingsBuilder
  *     .echoSettings()
@@ -269,7 +271,6 @@ public class EchoStubSettings extends StubSettings<EchoStubSettings> {
     return collideNameSettings;
   }
 
-  @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public EchoStub createStub() throws IOException {
     if (getTransportChannelProvider()
         .getTransportName()

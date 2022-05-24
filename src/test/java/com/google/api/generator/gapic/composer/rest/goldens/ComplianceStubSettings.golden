@@ -43,6 +43,8 @@ import javax.annotation.Generated;
  * <p>For example, to set the total timeout of repeatDataBody to 30 seconds:
  *
  * <pre>{@code
+ * // This snippet has been automatically generated for illustrative purposes only.
+ * // It may require modifications to work in your environment.
  * ComplianceStubSettings.Builder complianceSettingsBuilder = ComplianceStubSettings.newBuilder();
  * complianceSettingsBuilder
  *     .repeatDataBodySettings()
@@ -101,7 +103,6 @@ public class ComplianceStubSettings extends StubSettings<ComplianceStubSettings>
     return repeatDataPathTrailingResourceSettings;
   }
 
-  @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public ComplianceStub createStub() throws IOException {
     if (getTransportChannelProvider()
         .getTransportName()

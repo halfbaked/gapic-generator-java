@@ -240,12 +240,12 @@ public class HttpJsonServiceStubClassComposer extends AbstractTransportServiceSt
   protected List<AnnotationNode> createClassAnnotations(Service service) {
     List<AnnotationNode> annotations = super.createClassAnnotations(service);
 
-    annotations.add(
-        AnnotationNode.builder()
-            .setType(FIXED_TYPESTORE.get("BetaApi"))
-            .setDescription(
-                "A restructuring of stub classes is planned, so this may break in the future")
-            .build());
+    TypeNode betaApiType = FIXED_TYPESTORE.get("BetaApi");
+
+    if (annotations.stream().noneMatch(a -> betaApiType.equals(a.type()))) {
+      annotations.add(AnnotationNode.builder().setType(betaApiType).build());
+    }
+
     return annotations;
   }
 
@@ -348,6 +348,16 @@ public class HttpJsonServiceStubClassComposer extends AbstractTransportServiceSt
                         "putPathParam")))
             .apply(expr);
 
+    if (!protoMethod.httpBindings().lowerCamelAdditionalPatterns().isEmpty()) {
+      expr =
+          methodMaker
+              .apply(
+                  "setAdditionalPaths",
+                  protoMethod.httpBindings().lowerCamelAdditionalPatterns().stream()
+                      .map(a -> ValueExpr.withValue(StringObjectValue.withValue(a)))
+                      .collect(Collectors.toList()))
+              .apply(expr);
+    }
     TypeNode fieldsVarGenericType =
         TypeNode.withReference(
             ConcreteReference.builder()
@@ -907,7 +917,9 @@ public class HttpJsonServiceStubClassComposer extends AbstractTransportServiceSt
       for (int i = 0; i < descendantFields.length; i++) {
         String currFieldName = descendantFields[i];
         String bindingFieldMethodName =
-            String.format("get%s", JavaStyle.toUpperCamelCase(currFieldName));
+            (i < descendantFields.length - 1 || !httpBindingFieldName.isRepeated())
+                ? String.format("get%s", JavaStyle.toUpperCamelCase(currFieldName))
+                : String.format("get%sList", JavaStyle.toUpperCamelCase(currFieldName));
         requestFieldGetterExprBuilder =
             requestFieldGetterExprBuilder.setMethodName(bindingFieldMethodName);
 

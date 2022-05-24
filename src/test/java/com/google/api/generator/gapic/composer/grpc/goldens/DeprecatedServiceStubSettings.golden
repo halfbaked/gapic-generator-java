@@ -44,6 +44,8 @@ import org.threeten.bp.Duration;
  * <p>For example, to set the total timeout of fastFibonacci to 30 seconds:
  *
  * <pre>{@code
+ * // This snippet has been automatically generated for illustrative purposes only.
+ * // It may require modifications to work in your environment.
  * DeprecatedServiceStubSettings.Builder deprecatedServiceSettingsBuilder =
  *     DeprecatedServiceStubSettings.newBuilder();
  * deprecatedServiceSettingsBuilder
@@ -86,7 +88,6 @@ public class DeprecatedServiceStubSettings extends StubSettings<DeprecatedServic
     return slowFibonacciSettings;
   }
 
-  @BetaApi("A restructuring of stub classes is planned, so this may break in the future")
   public DeprecatedServiceStub createStub() throws IOException {
     if (getTransportChannelProvider()
         .getTransportName()
